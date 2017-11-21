@@ -177,12 +177,6 @@ bool isLaneEntryPossible( int potential_lane, vector <vector<double>> sensor_fus
       check_car_s+=((double)prev_size*increment_time*check_speed);
       // check s values greater than test car s value and necessary gap
       if( ((check_car_s-car_s) < 50) &&  ((check_car_s-car_s) > -50) ){
-        cout << "car in potential lane, cant pass";
-        cout << " ";
-        cout << check_car_s - car_s;
-        cout << " ";
-        cout << potential_lane;
-        cout << endl;
         return false;
       }
     }
@@ -414,8 +408,8 @@ int main() {
             // fill out path planner to 50 points chosing points along spline so that velocity around speed limit
             for(int i = 0; i <= 50-previous_path_x.size(); i++){
               // gradually increase or decrease velocity if too close to car or below speed limit
+              // choose .1 because change every .02s so equivalent to a 5 m/s change
               if(too_close){
-                // choose .1 because change every .02s so equivalent to a 5 m/s change
                 ref_vel -= .1;
               }
               else if(ref_vel < 49/2.24){
